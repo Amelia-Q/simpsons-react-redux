@@ -1,30 +1,35 @@
-import initialState from "./initialState";
-import { SET_API_DATA, ON_LIKE_TOGGLE, DELETE } from "./types";
+import { initialState } from "./initialState";
+import { SET_API_DATA, TOGGLE_LIKE, DELETE, SET_SORT_ORDER } from "./types";
 
 export function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_API_DATA: {
-      const _state = { ...state };
-      _state.characters = action.payload;
-      return _state;
+      return { ...state, simpsons: action.payload };
     }
 
-    case ON_LIKE_TOGGLE:
-      const index = state.characters.findIndex((character) => {
-        return character.quote === action.payload;
-      });
-      const _characters = { ...state.characters };
-      _characters[index].liked = !_characters[index].liked;
-      return { ...state, characters: _characters };
+    case TOGGLE_LIKE:
+      const index = state.simpsons.findIndex(
+        (item) => item.quote === action.payload
+      );
+
+      const simpsons = [...state.simpsons];
+      simpsons[index].liked = !simpsons[index].liked;
+      return { ...state, simpsons };
 
     case DELETE: {
-      const index = state.characters.findIndex((character) => {
-        return character.quote === action.payload;
-      });
-      const _characters = { ...state.characters };
-      _characters.splice(index, 1);
-      return { ...state, characters: _characters };
+      const index = state.simpsons.findIndex(
+        (item) => item.quote === action.payload
+      );
+
+      const simpsons = [...state.simpsons];
+      simpsons.splice(index, 1);
+      return { ...state, simpsons };
     }
+
+    case SET_SORT_ORDER: {
+      return { ...state, sortOrder: action.payload };
+    }
+
     default:
       console.log("Reducer type not known, probably a typo");
       return state;

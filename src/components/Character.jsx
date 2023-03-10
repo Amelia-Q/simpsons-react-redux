@@ -4,30 +4,12 @@ import Quote from "./Quote";
 import Image from "./Image";
 
 const Character = (props) => {
-  const {
-    // onDelete,
-    name,
-    quote,
-    image,
-    characterDirection,
-    // onLikeToggle,
-    liked,
-    // addToFavourites,
-    added,
-  } = props;
+  const { name, quote, image, characterDirection, liked } = props;
 
   if (characterDirection === "Left") {
     return (
       <>
-        <Name
-          liked={liked}
-          name={name}
-          // onLikeToggle={onLikeToggle}
-          // onDelete={onDelete}
-          quote={quote}
-          added={added}
-          // addToFavourites={addToFavourites}
-        />
+        <Name liked={liked} name={name} quote={quote} />
         <Image image={image} name={name} />
         <Quote quote={quote} />
       </>
@@ -36,15 +18,7 @@ const Character = (props) => {
 
   return (
     <>
-      <Name
-        liked={liked}
-        name={name}
-        // onLikeToggle={onLikeToggle}
-        // onDelete={onDelete}
-        quote={quote}
-        added={added}
-        // addToFavourites={addToFavourites}
-      />
+      <Name liked={liked} name={name} quote={quote} />
       <Quote quote={quote} />
       <Image image={image} name={name} />
     </>
